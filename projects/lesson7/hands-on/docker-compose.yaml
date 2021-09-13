@@ -1,0 +1,24 @@
+version: "3.7"
+volumes:
+  chrono-logy:
+services:
+  log-writer:
+    image: alpine:3.14
+    command: "sh -c 'while true; do date >> /tmp/log/chronograph; sleep 3; done'"
+    restart: unless-stopped
+    healthcheck:
+      test: test `wc -l < /tmp/log/chronograph` -gt 5
+      interval: 3s
+      retries: 10
+    volumes:
+      - chrono-logy:/tmp/log/
+
+  log-reader:
+    image: alpine:3.14
+    command: "sh -c 'while true; do tail -1 /tmp/log/chronograph; sleep 3; done'"
+    restart: unless-stopped
+    depends_on:
+      log-writer:
+        condition: service_healthy
+    volumes:
+      - chrono-logy:/tmp/log/
