@@ -1,4 +1,4 @@
-# AWS: S3 and EC2
+# AWS: S3
 
 ## S3
 
