@@ -1,0 +1,1 @@
+Modify the lambda function from [Hands-on](lesson13.md) task from lesson 13 to process png and jpg images uploaded to `name-surname-upload` bucket. The function should add text overlay saying `Modified by Lambda`. Bonus points for using a custom font and setting the text color to white with black outline.
